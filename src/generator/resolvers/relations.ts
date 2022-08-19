@@ -139,9 +139,9 @@ export default function generateRelationsResolverClassesFromModel(
           ],
           // TODO: refactor to AST
           statements: [
-            /* ts */ `return getPrismaFromContext(ctx).${camelCase(
-              model.name,
-            )}.findUnique({
+            /* ts */ `return getPrismaFromContext(ctx,"${
+              dmmfDocument.options.contextPrismaKey
+            }").${camelCase(model.name)}.findUnique({
               where: {${whereConditionString}},
             }).${field.name}(${field.argsTypeName ? "args" : "{}"});`,
           ],

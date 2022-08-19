@@ -22,8 +22,8 @@ export function generateHelpersFile(
   `);
 
   sourceFile.addStatements(/* ts */ `
-    export function getPrismaFromContext(context: any) {
-      const prismaClient = context["${options.contextPrismaKey}"];
+    export function getPrismaFromContext(context: any,contextPrismaKey:string) {
+      const prismaClient = context[contextPrismaKey];
       if (!prismaClient) {
         throw new Error("Unable to find Prisma Client in GraphQL context. Please provide it under the \`context[\\"${options.contextPrismaKey}\\"]\` key.");
       }
