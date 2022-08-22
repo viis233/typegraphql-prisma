@@ -15,6 +15,7 @@ import {
 } from "./imports";
 import { DmmfDocument } from "./dmmf/dmmf-document";
 import { DMMF } from "./dmmf/types";
+import { geneFiledType } from "../customized";
 
 export default function generateArgsTypeClassFromArgs(
   project: Project,
@@ -69,7 +70,7 @@ export default function generateArgsTypeClassFromArgs(
           {
             name: "TypeGraphQL.Field",
             arguments: [
-              `_type => ${arg.typeGraphQLType}`,
+              geneFiledType(arg.name, arg.typeGraphQLType),
               Writers.object({
                 nullable: `${!arg.isRequired}`,
               }),

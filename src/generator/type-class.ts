@@ -22,6 +22,7 @@ import {
 import { DmmfDocument } from "./dmmf/dmmf-document";
 import { DMMF } from "./dmmf/types";
 import { GeneratorOptions } from "./options";
+import { geneFiledType } from "../customized";
 
 export function generateOutputTypeClassFromType(
   project: Project,
@@ -87,7 +88,7 @@ export function generateOutputTypeClassFromType(
           {
             name: "TypeGraphQL.Field",
             arguments: [
-              `_type => ${field.typeGraphQLType}`,
+              geneFiledType(field.name, field.typeGraphQLType),
               Writers.object({
                 nullable: `${!field.isRequired}`,
               }),
@@ -166,7 +167,7 @@ export function generateInputTypeClassFromType(
                 {
                   name: "TypeGraphQL.Field",
                   arguments: [
-                    `_type => ${field.typeGraphQLType}`,
+                    geneFiledType(field.name, field.typeGraphQLType),
                     Writers.object({
                       nullable: `${!field.isRequired}`,
                     }),
@@ -190,7 +191,7 @@ export function generateInputTypeClassFromType(
           {
             name: "TypeGraphQL.Field",
             arguments: [
-              `_type => ${field.typeGraphQLType}`,
+              geneFiledType(field.name, field.typeGraphQLType),
               Writers.object({
                 nullable: `${!field.isRequired}`,
               }),

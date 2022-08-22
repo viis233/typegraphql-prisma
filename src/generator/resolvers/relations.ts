@@ -16,6 +16,7 @@ import {
 } from "../imports";
 import { DmmfDocument } from "../dmmf/dmmf-document";
 import { DMMF } from "../dmmf/types";
+import { geneFiledType } from "../../customized";
 
 export default function generateRelationsResolverClassesFromModel(
   project: Project,
@@ -107,7 +108,7 @@ export default function generateRelationsResolverClassesFromModel(
             {
               name: "TypeGraphQL.FieldResolver",
               arguments: [
-                `_type => ${field.typeGraphQLType}`,
+                geneFiledType(field.name, field.typeGraphQLType),
                 Writers.object({
                   nullable: `${!field.isRequired}`,
                   ...(field.docs && { description: `"${field.docs}"` }),

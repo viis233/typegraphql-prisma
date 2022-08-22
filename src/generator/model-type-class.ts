@@ -6,6 +6,7 @@ import {
   Writers,
 } from "ts-morph";
 import path from "path";
+import { geneFiledType } from "../customized";
 
 import {
   generateTypeGraphQLImport,
@@ -104,7 +105,7 @@ export default function generateObjectTypeClassFromModel(
                   {
                     name: "TypeGraphQL.Field",
                     arguments: [
-                      `_type => ${field.typeGraphQLType}`,
+                      geneFiledType(field.name, field.typeGraphQLType),
                       Writers.object({
                         nullable: `${isOptional}`,
                         ...(field.docs && { description: `"${field.docs}"` }),
@@ -130,7 +131,7 @@ export default function generateObjectTypeClassFromModel(
                 {
                   name: "TypeGraphQL.Field",
                   arguments: [
-                    `_type => ${countField.typeGraphQLType}`,
+                    geneFiledType(countField.name, countField.typeGraphQLType),
                     Writers.object({
                       nullable: `${!countField.isRequired}`,
                     }),
@@ -157,7 +158,7 @@ export default function generateObjectTypeClassFromModel(
             {
               name: "TypeGraphQL.Field",
               arguments: [
-                `_type => ${field.typeGraphQLType}`,
+                geneFiledType(field.name, field.typeGraphQLType),
                 Writers.object({
                   nullable: `${!field.isRequired}`,
                   ...(field.docs && { description: `"${field.docs}"` }),
